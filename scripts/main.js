@@ -102,7 +102,10 @@ function writeHikes() {
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("hikeCardTemplate");
 
-    db.collection(collection).get() //the collection called "hikes"
+    db.collection(collection)
+        .orderBy("hike_time", "desc")
+        .limit(2)
+        .get() //the collection called "hikes"
         .then(allHikes => {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
             allHikes.forEach(doc => { //iterate thru each doc
